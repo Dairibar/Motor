@@ -52,9 +52,9 @@ public class TouchCamController : MonoBehaviour {
 	public float yMaxLimit = 80;
 
 
-	public float MaxDeltax=1;
-	public float MaxDeltay=0.5f;
-	public float FactorPaneo2Dedos=2;
+	public float MaxDeltax = 1;
+	public float MaxDeltay = 0.5f;
+	public float FactorPaneo2Dedos = 2;
 
 	public Transform target;
 
@@ -72,12 +72,12 @@ public class TouchCamController : MonoBehaviour {
 
 	private void OnEnable()
 	{
-		_PaneoIntenso=transform.GetComponent<PanGesture>();
+		_PaneoIntenso = transform.GetComponent<PanGesture>();
 		_PaneoIntenso.Panned += panStateChangeHandler;
 		_PaneoIntenso.PanCompleted += panStateChangeHandler;
 
 
-		_ScaleoIntenso=transform.GetComponent<ScaleGesture>();
+		_ScaleoIntenso = transform.GetComponent<ScaleGesture>();
 		_ScaleoIntenso.Scaled += scaleStateChangeHandler;
 
 	}
@@ -91,11 +91,11 @@ public class TouchCamController : MonoBehaviour {
 	
 	void Update ()
 	{
-		if (target && _Speed.magnitude>0)
+		if (target && _Speed.magnitude > 0)
 		{
 			// Amortiguacion de la velocidad
-			if(_Speed.magnitude>0.05){
-				_Speed= (1-Time.deltaTime)* _Speed;
+			if(_Speed.magnitude > 0.05){
+				_Speed = (1-Time.deltaTime)* _Speed;
 			}
 			else{
 				_Speed.Set(0.0f,0.0f);
@@ -109,29 +109,30 @@ public class TouchCamController : MonoBehaviour {
 			//transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(0.0f, 0.0f, -distance) + target.position;
 		}
 
-		if (Mathf.Abs(ZoomInertia)>0){
-			if (Mathf.Abs(ZoomInertia)>0.01){
-				ZoomInertia*=(1-4*Time.deltaTime);
+		if (Mathf.Abs(ZoomInertia) > 0)
+		{
+			if (Mathf.Abs(ZoomInertia) > 0.01)
+			{
+				ZoomInertia *= (1-4*Time.deltaTime);
 			}
 			else{
-				ZoomInertia=0;
+				ZoomInertia = 0;
 			}
 			// Amortiguo el zoom
-			distance/=(Escala-ZoomInertia/4);
+			distance /= (Escala-ZoomInertia/4);
 			// Limites de escalamiento
-			distance=Mathf.Clamp(distance, Mindistance, Maxdistance);
+			distance = Mathf.Clamp(distance, Mindistance, Maxdistance);
 		}
 
-		if (DeltaPaneo2Dedos.magnitude>0){
-			DeltaPaneo2Dedos*=(1-4*Time.deltaTime);
-			Paneo2Dedos+=DeltaPaneo2Dedos;
-			Paneo2Dedos=new Vector2(Mathf.Clamp(Paneo2Dedos.x,-MaxDeltax,MaxDeltax),
+		if (DeltaPaneo2Dedos.magnitude > 0)
+		{
+			DeltaPaneo2Dedos *=( 1-4*Time.deltaTime);
+			Paneo2Dedos += DeltaPaneo2Dedos;
+			Paneo2Dedos = new Vector2(Mathf.Clamp(Paneo2Dedos.x,-MaxDeltax,MaxDeltax),
 			                        Mathf.Clamp(Paneo2Dedos.y,-MaxDeltay,MaxDeltay));
 		}
 
-		transform.position = (Quaternion.Euler(y, x, 0)) * 
-			new Vector3(FactorPaneo2Dedos*Paneo2Dedos.x,FactorPaneo2Dedos*Paneo2Dedos.y, -distance) + 
-				target.position;//new Vector3(,0);
+		transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(FactorPaneo2Dedos*Paneo2Dedos.x,FactorPaneo2Dedos*Paneo2Dedos.y, -distance) + target.position;//new Vector3(,0);
 	}
 
 	static float ClampAngle(float angle, float min, float max) 
@@ -154,7 +155,7 @@ public class TouchCamController : MonoBehaviour {
 		 * _MyGesture: Variable del tipo Gesture que es casteada desde el objeto que envia el 
 		 * evento. Con esto, se tiene acceso al punto previo que notifico el Gesture.
 		 */ 
-		Gesture _MyGesture=sender as Gesture;
+		Gesture _MyGesture = sender as Gesture;
 
 		/*
 		 * Decisiones en funcion del Gesture que ha sido reconocido
@@ -164,21 +165,22 @@ public class TouchCamController : MonoBehaviour {
 		switch(_MyGesture.ActiveTouches.Count)
 		{
 		case 1:
-			_Son2Dedos=false;
+			_Son2Dedos = false;
 			Debug.Log("1 dedo!!!");
 			//Paneo2Dedos.Set(0.0f,0.0f);
 			break;
 		case 2:
-			_Son2Dedos=true;
+			_Son2Dedos = true;
 			Debug.Log("2 dedos!!!");
-			DeltaPaneo2Dedos+=_MyGesture.PreviousNormalizedScreenPosition-_MyGesture.NormalizedScreenPosition;
+			DeltaPaneo2Dedos += _MyGesture.PreviousNormalizedScreenPosition-_MyGesture.NormalizedScreenPosition;
 			break;
 		default:
 			//print ("Que chucha!!!");
 			break;
 		}
 
-		switch (_MyGesture.State){
+		switch (_MyGesture.State)
+		{
 		case Gesture.GestureState.Began:
 			Debug.Log("Empezo el paneo");
 			break;
@@ -187,9 +189,9 @@ public class TouchCamController : MonoBehaviour {
 			break;
 		default :
 			Debug.Log("El gesture esta siendo reconocido");
-			if (_MyGesture.ScreenPosition.x!=null && !_Son2Dedos){
+			if (_MyGesture.ScreenPosition.x != null && !_Son2Dedos){
 				//_TouchScreenPos=_MyGesture.ScreenPosition;
-				_Speed=_MyGesture.ScreenPosition-_MyGesture.PreviousScreenPosition;
+				_Speed = _MyGesture.ScreenPosition-_MyGesture.PreviousScreenPosition;
 			}
 			break;
 		}
@@ -197,10 +199,10 @@ public class TouchCamController : MonoBehaviour {
 	}
 	private void scaleStateChangeHandler(object sender, EventArgs e)
 	{
-		ScaleGesture _MyGesture=sender as ScaleGesture;
+		ScaleGesture _MyGesture = sender as ScaleGesture;
 
-		float delta=_MyGesture.LocalDeltaScale;
-		ZoomInertia=1-delta;
+		float delta = _MyGesture.LocalDeltaScale;
+		ZoomInertia = 1-delta;
 
 	}
 }

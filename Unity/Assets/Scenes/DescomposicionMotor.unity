@@ -378,6 +378,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 194390833}
   - 111: {fileID: 194390834}
+  - 114: {fileID: 194390835}
   m_Layer: 0
   m_Name: motor
   m_TagString: Untagged
@@ -506,6 +507,7 @@ Transform:
   - {fileID: 879914956}
   - {fileID: 958289925}
   - {fileID: 930387786}
+  - {fileID: 1504898390}
   m_Father: {fileID: 0}
   m_RootMapOrder: 2
 --- !u!111 &194390834
@@ -524,6 +526,19 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &194390835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194390832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68169668e545c94c980927836c19338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iniciaApertura: 0
+  iniciaCierre: 0
 --- !u!1 &216006552
 GameObject:
   m_ObjectHideFlags: 0
@@ -4707,10 +4722,9 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1400128456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.19199991}
+  m_LocalPosition: {x: -.219999999, y: 0, z: -2.19199991}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1504898390}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootMapOrder: 0
 --- !u!114 &1400128458
@@ -4767,7 +4781,7 @@ MonoBehaviour:
   factorPaneo: 10
   xSpeed: 250
   ySpeed: 120
-  yMinLimit: 0
+  yMinLimit: -360
   yMaxLimit: 360
   MaxDeltax: 1
   MaxDeltay: .5
@@ -5288,12 +5302,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1504898388}
-  m_LocalRotation: {x: -.413794011, y: 0, z: 0, w: .910370529}
-  m_LocalPosition: {x: -.00494384766, y: .0175562333, z: -.0241302811}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -.284597158, y: .660859823, z: .300383002, w: .626130044}
+  m_LocalPosition: {x: -.179583952, y: .00883379113, z: .020564964}
+  m_LocalScale: {x: .0838420987, y: .0838420987, z: .0838420987}
   m_Children: []
-  m_Father: {fileID: 1400128457}
-  m_RootMapOrder: 0
+  m_Father: {fileID: 194390833}
+  m_RootMapOrder: 111
 --- !u!1 &1519173126
 GameObject:
   m_ObjectHideFlags: 0
